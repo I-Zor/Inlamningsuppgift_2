@@ -15,7 +15,7 @@ public class ListUtil {
     public List<Person> readDataFromOriginalFile(String readFromFile) {
 
         String firstLine;
-        String personsDataSecondLine = null;
+        String personsDataSecondLine = "";
         Path inFile;
         List<Person> personList = new ArrayList<>();
 
@@ -27,12 +27,14 @@ public class ListUtil {
             while (sc.hasNext()) {
                 firstLine = sc.nextLine();
                 personsDataFirstLine = firstLine.split(",");
+                sc.nextLine();
                 if (sc.hasNext()) {
                     personsDataSecondLine = sc.nextLine();
+                    sc.nextLine();
                 }
 
-                Person p = new Person(personsDataFirstLine[0], personsDataFirstLine[1],
-                        personsDataSecondLine);
+                Person p = new Person(personsDataFirstLine[0].trim(), personsDataFirstLine[1].trim(),
+                        personsDataSecondLine.trim());
 
                 personList.add(p);
             }

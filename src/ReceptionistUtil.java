@@ -6,14 +6,14 @@ public class ReceptionistUtil {
 
    DateUtil du = new DateUtil();
    ListUtil lu = new ListUtil();
-   String writeToFile = "trainingOccasions.txt";
+   String writeToFile = "src/trainingOccasions.txt";
    String readFromFile = "src/customers.txt";
 
 
    public String isLookingForMembers(String input) {
       List<Person> personList = lu.readDataFromOriginalFile(readFromFile);
       LocalDate lt = LocalDate.now();
-      String response = "blabla";
+      String response = "";
       for (Person p : personList) {
          if ((p.name.equalsIgnoreCase(input) || p.pn.equals(input)) &&
                  du.isDurationShorterThanYear(p.dateOfAnnualFee, lt)) {

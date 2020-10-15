@@ -26,8 +26,9 @@ public class Main {
                 sc.nextLine();
             }
             if (respons == 1) {
+                Scanner s = new Scanner(System.in);
                 System.out.println("Ange namn eller personnummer:");
-                String input = sc.next();
+                String input = s.nextLine();
                 System.out.println(ru.isLookingForMembers(input));
             } else if (respons == 2) {
                 System.out.println("Ange namn eller personnummer:");

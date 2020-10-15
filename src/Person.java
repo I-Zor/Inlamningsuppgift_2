@@ -16,4 +16,16 @@ public class Person {
         this.pn = pn;
         this.dateOfAnnualFee = dateOfAnnualFee;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPn() {
+        return pn;
+    }
+
+    public String getDateOfAnnualFee() {
+        return dateOfAnnualFee;
+    }
 }
