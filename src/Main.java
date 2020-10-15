@@ -4,6 +4,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        String originalFile = "src/customers.txt";
+        ListUtil lu = new ListUtil();
+        lu.readDataFromOriginalFile(originalFile);
+
         Scanner sc = new Scanner(System.in);
         Mode m = new Mode();
         int respons = 0;
