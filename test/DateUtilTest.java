@@ -12,9 +12,9 @@ public class DateUtilTest {
     @Test
     public void isDurationShorterThanYear(){
         String date = "2020-10-15";
-        String dateOfAnnualFee = "2019-11-11";
+        String dateOfAnnualFee = "2019-11-16";
         LocalDate l = LocalDate.parse(date);
-        assertEquals(du.isDurationShorterThanYear(dateOfAnnualFee, l), true );
+        assertEquals(du.isDurationShorterThanYear(dateOfAnnualFee), true );
     }
 
 

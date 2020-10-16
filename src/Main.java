@@ -8,7 +8,7 @@ public class Main {
         ListUtil lu = new ListUtil();
         ReceptionistUtil ru = new ReceptionistUtil();
         TrainerUtil tu = new TrainerUtil();
-        lu.readDataFromOriginalFile(originalFile);
+        lu.readCustomersFile(originalFile);
 
         Scanner sc = new Scanner(System.in);
         int respons = 0;
@@ -19,7 +19,7 @@ public class Main {
                     "\n1 - receptionist\n2 - personliga tränare");
             try {
                 respons = sc.nextInt();
-             right = false;
+                right = false;
             } catch (InputMismatchException e) {
                 e.printStackTrace();
                 System.out.println("Felaktig inmatning. Försök igen.");
@@ -31,10 +31,12 @@ public class Main {
                 String input = s.nextLine();
                 System.out.println(ru.isLookingForMembers(input));
             } else if (respons == 2) {
+                Scanner x = new Scanner(System.in);
                 System.out.println("Ange namn eller personnummer:");
-                String input = sc.next();
+                String input = x.nextLine();
                 System.out.println(tu.isLookingForTrainingOccasion(input));
             }
         }
     }
 }
+

@@ -6,7 +6,7 @@ public class Person {
     protected String dateOfAnnualFee;
 
     public Person(){}
-    public Person(String name, String pn){
+    public Person(String pn, String name){
         this.name = name;
         this.pn = pn;
     }

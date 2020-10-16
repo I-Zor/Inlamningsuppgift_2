@@ -9,6 +9,10 @@ public class TrainingOccasion extends Person{
 
     public TrainingOccasion(String pn, String name, LocalDate dateOfTraining){
         super(name, pn);
-        dateOfTraining = LocalDate.now();
+        this.dateOfTraining = LocalDate.now();
+    }
+
+    public LocalDate getDateOfTraining() {
+        return dateOfTraining;
     }
 }

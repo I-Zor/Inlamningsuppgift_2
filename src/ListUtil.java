@@ -1,6 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,28 +10,29 @@ import java.util.Scanner;
 
 public class ListUtil {
 
-    public List<Person> readDataFromOriginalFile(String readFromFile) {
+    public List<Person> readCustomersFile(String readFromFile) {
 
         String firstLine;
         String personsDataSecondLine = "";
         Path inFile;
         List<Person> personList = new ArrayList<>();
 
-        String[] personsDataFirstLine;
+        String personsDataFirstLine_pn;
+        String personsDataFirstLine_name;
         inFile = Paths.get(readFromFile);
 
         try (Scanner sc = new Scanner(inFile)) {
 
             while (sc.hasNext()) {
                 firstLine = sc.nextLine();
-                personsDataFirstLine = firstLine.split(",");
-                sc.nextLine();
+                personsDataFirstLine_pn = firstLine.substring(0, 10);
+                personsDataFirstLine_name = firstLine.substring(12);
+
                 if (sc.hasNext()) {
                     personsDataSecondLine = sc.nextLine();
-                    sc.nextLine();
                 }
 
-                Person p = new Person(personsDataFirstLine[0].trim(), personsDataFirstLine[1].trim(),
+                Person p = new Person(personsDataFirstLine_pn.trim(), personsDataFirstLine_name.trim(),
                         personsDataSecondLine.trim());
 
                 personList.add(p);
@@ -48,9 +47,11 @@ public class ListUtil {
 
     public void writeDataToTrainersFile(String writeToFile, TrainingOccasion to) {
         Path outFile = Paths.get(writeToFile);
-        try (PrintWriter w = new PrintWriter(
-                Files.newBufferedWriter(outFile, StandardOpenOption.APPEND))) {
-            w.print(to.pn + ", " + to.name + ", " + to.dateOfTraining);
+        try (BufferedWriter w = new BufferedWriter(new PrintWriter(new FileWriter(new File(writeToFile), true))))
+                //(BufferedWriter w = new BufferedWriter(new PrintWriter(new FileWriter(new File("MembersTrained.txt"),true))))
+               // Files.newBufferedWriter(outFile, StandardOpenOption.APPEND)))
+        {
+            w.write(to.name + ", " + to.pn + "\n" + to.getDateOfTraining() + "\n");
         } catch (FileNotFoundException e) {
             System.out.println("Filen kunde inte hittas");
             e.printStackTrace();
@@ -66,23 +67,29 @@ public class ListUtil {
         }
     }
 
-    public List<TrainingOccasion> readDataFromTrainersFile(String readFromFile) {
+    public List<TrainingOccasion> readTrainingOccasionsFile(String readFromFile) {
 
         String input;
-        String[] trainingOccasionData;
+        String trainingOccasionFirstLine_name;
+        String trainingOccasionFirstLine_pn;
+        String trainingOccasionSecondLine = "";
         Path inFile;
         List<TrainingOccasion> trainingOccasionList = new ArrayList<>();
 
         inFile = Paths.get(readFromFile);
 
         try (Scanner sc = new Scanner(inFile)) {
-
             while (sc.hasNext()) {
                 input = sc.nextLine();
-                trainingOccasionData = input.split(",");
+                trainingOccasionFirstLine_pn = input.substring(0, 10);
+                trainingOccasionFirstLine_name = input.substring(12);
+                if (sc.hasNext()) {
+                    trainingOccasionSecondLine = sc.nextLine();
+                }
 
-                TrainingOccasion x = new TrainingOccasion(trainingOccasionData[0], trainingOccasionData[1],
-                        LocalDate.parse(trainingOccasionData[2]));
+                TrainingOccasion x = new TrainingOccasion(trainingOccasionFirstLine_pn.trim(),
+                        trainingOccasionFirstLine_name.trim(),
+                        LocalDate.parse(trainingOccasionSecondLine));
 
                 trainingOccasionList.add(x);
             }

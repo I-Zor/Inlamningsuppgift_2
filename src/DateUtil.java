@@ -8,16 +8,16 @@ public class DateUtil {
         return LocalDate.parse(time);
     }
 
-    public boolean isDurationShorterThanYear(String dateOfAnnualFee, LocalDate l){
+    public boolean isDurationShorterThanYear(String dateOfAnnualFee){
         LocalDate d = getLocalDate(dateOfAnnualFee);
-        l = LocalDate.now();
-        int duration = Period.between(d, l).getDays();
-        if (duration <= 365)
+        LocalDate l = LocalDate.now();
+   /*     d.plusYears(1);
+       if (d.isAfter(l))
             return true;
         else
-            return false;
-
+            return false;*/
+        Period duration = Period.between(d, l);
+          return duration.getYears() == 0 || duration.getYears() == 1 &&
+                duration.getMonths() == 0 && duration.getDays() == 0;
     }
-
-
 }
